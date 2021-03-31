@@ -21,9 +21,9 @@
                 </div>
                 @if(isset($estatus))
                     @if($estatus == "success")
-                        <label class="text-primary">{{$mensaje}}</label>
+                        <label class="text-primary text-center">{{$mensaje}}</label>
                     @elseif($estatus == "error")
-                        <label class="text-danger">{{$mensaje}}</label>
+                        <label class="text-danger text-center">{{$mensaje}}</label>
                     @endif
                 @endif
                 <div class="form-group mx-sm-4 pt-3">

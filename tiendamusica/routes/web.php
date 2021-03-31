@@ -35,6 +35,6 @@ Route::get('/registro',[UsuarioController::class,'registro'])->name('registro');
 Route::post('/registro',[UsuarioController::class,'registroForm'])->name('registro.form');
 
 Route::prefix('/usuario')->middleware("VerificarUsuario")->group(function (){
-
+    Route::get('/inicio', [TableroController::class,'inicio'])->name('usuario.inicio');
 
 });
