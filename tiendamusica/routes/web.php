@@ -37,6 +37,11 @@ Route::post('/registro',[UsuarioController::class,'registroForm'])->name('regist
 Route::prefix('/usuario')->middleware("VerificarUsuario")->group(function (){
     Route::get('/inicio', [UsuarioController::class,'inicio'])->name('usuario.inicio');
     Route::get('/perfil', [UsuarioController::class,'perfil'])->name('usuario.perfil');
+    Route::get('/Datos', [UsuarioController::class,'datos'])->name('usuario.datos');
+    Route::post('/direccion/{idUsuario?}',[UsuarioController::class,'direccion'])->name('direccion.form');
+    Route::post('/tarjeta/{idUsuario?}',[UsuarioController::class,'tarjeta'])->name('tarjeta.form');
+    Route::get('/envio/{idDireccion?}/{idProducto?}',[UsuarioController::class,'envio'])->name('usario.envio');
+
 });
 
 Route::prefix('/proveedor')->middleware("VerificarProveedor")->group(function (){

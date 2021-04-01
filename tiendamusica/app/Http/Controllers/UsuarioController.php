@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Direccion;
+use App\Models\Envio;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\Admin;
@@ -30,6 +31,10 @@ class UsuarioController extends Controller
     public function cerrarSesion(){
         if(Session::has('usuario'))
             Session::forget('usuario');
+        if(Session::has('tarjeta'))
+            Session::forget('tarjeta');
+        if(Session::has('direccion'))
+            Session::forget('direccion');
 
         return redirect()->route('login.form');
     }
@@ -120,10 +125,46 @@ class UsuarioController extends Controller
     public function perfil(){
         return view('perfilUsuario');
     }
+    public function datos(){
+        return view('direccionTarjeta');
+    }
+    public function direccion(Request $datos,$idusuario){
+        $direccion = new Direccion();
 
-    public function productos(Request $request){
+        $direccion->CP=$datos->CP;
+        $direccion->calle=$datos->calle;
+        $direccion->no_Interior=$datos->no_Interior;
+        $direccion->no_Exterior=$datos->no_Exterior;
+        $direccion->telefono=$datos->telefono;
+        $direccion->referencia=$datos->referencia;
+        $direccion->id_Usuario=$idusuario;
+
+        $direccion->save();
+        $direccion = Direccion::where("id_Usuario",$idusuario)->first();
+        Session::put('direccion',$direccion);
+        return view('direccionTarjeta');
+
+    }
+    public function tarjeta(Request $datos){
+        $tarjeta = new Tarjeta();
+        $tarjeta->folio_Tarjeta=$datos->folio_Tarjeta;
+        $tarjeta->fechVencimiento=$datos->fech_Vencimineto;
+        $tarjeta->noSeguridad=$datos->noSeguridad;
+        $tarjeta->compania=$datos->compania;
+        $tarjeta->id_Usuario=$idusuario;
+        $tarjeta->save();
+        $tarjeta = Tarjeta::where("id_Usuario",$idusuario)->first();
+        Session::put('tarjeta',$tarjeta);
         $productos = Producto::get();
-        return response(json_encode($productos),200)->header('Content-type','text/plain');
+        return view('inicioUsuario',["productos"=>$productos]);
+    }
+    public function envio($idDireccion,$id){
+
+        $envio = new Envio();
+        $envio->id_UD=$idDireccion;
+        $envio->id_Producto=$id;
+        $envio->estatus='Pedido';
+        return json_encode(["estatus" => "success","mensaje" => "Ya rifaste"]);
     }
 
 }

@@ -41,10 +41,10 @@
                 <div class="dropdown-menu " aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{route('usuario.perfil')}}">Perfil</a>
                     @if(!isset(session('direccion')->id_Direccion))
-                    <a class="dropdown-item" href="">Agregar Direccion</a>
+                    <a class="dropdown-item" href="{{route('usuario.datos')}}">Agregar Direccion</a>
                     @endif
                     @if(!isset(session('tarjeta')->folio_Tarjeta))
-                    <a class="dropdown-item" href="">Agregar Tarjeta</a>
+                    <a class="dropdown-item" href="{{route('usuario.datos')}}">Agregar Tarjeta</a>
                     @endif
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{route('cerrar.sesion')}}">Cerrar Sesion</a>
