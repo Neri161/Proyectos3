@@ -27,10 +27,10 @@
                     @endif
                 @endif
                 <div class="form-group mx-sm-4 pt-3">
-                    <input type="text" class="form-control" placeholder="Ingrese su Usuario">
+                    <input type="text" class="form-control" name="correo" placeholder="Ingrese su Usuario">
                 </div>
                 <div class="form-group mx-sm-4 pb-3">
-                    <input type="text" class="form-control" placeholder="Ingrese su Contraseña">
+                    <input type="password" class="form-control" name="password" placeholder="Ingrese su Contraseña">
                 </div>
                 <div class="form-group mx-sm-4 pb-2">
                     <input type="submit" class="btn btn-block ingresar" value="INGRESAR">
@@ -41,7 +41,6 @@
                 @if(isset($_GET["r"]))
                     <input type="hidden" name="url" value="{{$_GET["r"]}}">
                 @endif
-
             </form>
             <div class="form-group text-center">
                 <span><a href="{{route('registro')}}" class="olvide1">Crear Cuenta</a></span>
