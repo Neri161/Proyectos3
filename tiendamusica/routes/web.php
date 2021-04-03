@@ -41,6 +41,7 @@ Route::prefix('/usuario')->middleware("VerificarUsuario")->group(function (){
     Route::post('/direccion/{idUsuario?}',[UsuarioController::class,'direccion'])->name('direccion.form');
     Route::post('/tarjeta/{idUsuario?}',[UsuarioController::class,'tarjeta'])->name('tarjeta.form');
     Route::get('/envio/{idDireccion?}/{idProducto?}',[UsuarioController::class,'envio'])->name('usario.envio');
+    Route::get('/carrito/{idDireccion?}',[UsuarioController::class,'carrito'])->name('usuario.carrito');
 
 });
 

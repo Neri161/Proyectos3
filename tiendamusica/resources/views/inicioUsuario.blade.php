@@ -25,14 +25,8 @@
                                 <p class="card-text">
                                     @if($valor['tipo']=="1") CD @else Vinyl @endif
                                 </p>
-
-                                    <div class="mostrar">
-                                        <input type="text" class="carrito" name="id" id="id" value="{{$valor['id']}}">
-                                        <input type="text" class="carrito" name="idDireccion" id="idDireccion" value="@if(session('direccion')){{session('direccion')->id_Direccion}}@endif">
-
-                                    </div>
                                     @if(session('direccion') && session('tarjeta'))
-                                        <button class="btn btn-primary form-control agregar" name="accion" value="agregar" id="agregar" type="submit">Comprar</button>
+                                        <button class="btn btn-primary form-control agregar" name="accion" producto="{{$valor['id']}}" id="agregar" type="submit" data-toggle='modal' data-target='#modal1'>Comprar</button>
                                     @else
                                         <i>Agrega tarjeta o Direccion</i>
                                     @endif
@@ -43,6 +37,21 @@
             @endif
         </div>
     </div>
+        <div class="modal" tabindex="-1" id="modal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center">Pedido...</h3>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/envio.gif" alt="envio">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-dismiss='modal'>&times;</button>
+                </div>
+            </div>
+        </div>
+        </div>
 @endsection
 
 @section('contenido')
@@ -53,27 +62,20 @@
     <script>
         $(document).ready(function () {
             $(".agregar").click(function (){
-                var idDireccion = $("#idDireccion").val();
-                var idProducto = $("#id").val();
-                agregar(idDireccion,idProducto)
+                var idProducto = $(this).attr('producto');
+                agregar(idProducto)
             });
-            function agregar(idDireccion,idProducto){
+            function agregar(idProducto){
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: "get",
-                    url: "{{route('usario.envio')}}/"+idDireccion+"/"+idProducto,
+                    url: "{{route('usario.envio')}}/{{session('direccion')->id_Direccion}}/"+idProducto,
                     dataType: 'json',
                     cache: false,
                     success: function (data) {
-                        if(data.estatus == "success"){
-                            alert(data.mensaje);
-                            location.reload();
-                        }else{
-                            alert(data.mensaje);
-                            location.reload();
-                        }
+
                     }
                 });
             }

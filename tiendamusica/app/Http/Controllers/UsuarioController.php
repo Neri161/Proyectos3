@@ -164,7 +164,12 @@ class UsuarioController extends Controller
         $envio->id_UD=$idDireccion;
         $envio->id_Producto=$id;
         $envio->estatus='Pedido';
+        $envio->save();
         return json_encode(["estatus" => "success","mensaje" => "Ya rifaste"]);
     }
-
+    public function carrito($idDireccion){
+        $productos = Producto::get();
+        $envio = Envio::where("id_UD",$idDireccion)->get();
+        return view('carrito',["productos"=>$productos,"envio"=>$envio]);
+    }
 }
