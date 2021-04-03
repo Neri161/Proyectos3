@@ -50,7 +50,7 @@
 
             </form>
             <div class="form-group mx-sm-4 text-right">
-                <span class=""><a href="#" class="olvide">¿Tienes una cuenta? ¡Inicia Sesión!</a></span>
+                <span class=""><a href="{{route('login')}}" class="olvide">¿Tienes una cuenta? ¡Inicia Sesión!</a></span>
             </div>
         </div>
     </div>

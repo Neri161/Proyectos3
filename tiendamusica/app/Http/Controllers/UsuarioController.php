@@ -35,6 +35,8 @@ class UsuarioController extends Controller
             Session::forget('tarjeta');
         if(Session::has('direccion'))
             Session::forget('direccion');
+        if(Session::has('admin'))
+            Session::forget('admin');
 
         return redirect()->route('login.form');
     }
@@ -91,7 +93,7 @@ class UsuarioController extends Controller
                     $url = decrypt($datos->url);
                     return redirect($url);
                 }else{
-                    return redirect()->route('proveedor.inicio');
+                    return redirect()->route('admin.inicio');
                 }
             }
             if(!Hash::check($datos->password,$proveedor->contrasenia))

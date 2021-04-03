@@ -45,6 +45,8 @@ Route::prefix('/usuario')->middleware("VerificarUsuario")->group(function (){
 
 });
 
-Route::prefix('/proveedor')->middleware("VerificarProveedor")->group(function (){
-    Route::get('/inicio', [UsuarioController::class,'inicio'])->name('proveedor.inicio');
+Route::prefix('/Admin')->middleware("VerificarAdmin")->group(function (){
+    Route::get('/inicio', [AdminController::class,'inicio'])->name('admin.inicio');
+    Route::get('/RegistroP', [AdminController::class,'registroProveedor'])->name('admin.proveedor');
+    Route::post('/RegistroProveedor', [AdminController::class,'verificarProveedor'])->name('admin.form');
 });
