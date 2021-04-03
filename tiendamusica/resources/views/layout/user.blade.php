@@ -33,7 +33,7 @@
         <!--Elementos de la derecha -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('usuario.carrito')}}/{{session('direccion')->id_Direccion}}"><i class="fas fa-cart-arrow-down"></i>Carrito(0)</a>
+                <a class="nav nav-link active" href="{{route('usuario.carrito')}}/{{session('direccion')->id_Direccion}}"><i class="fas fa-cart-arrow-down"></i>Carrito(<span id="mensaje">{{$pedidos}}</span>)</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="true">

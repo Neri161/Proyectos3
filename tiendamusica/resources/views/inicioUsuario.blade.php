@@ -75,7 +75,12 @@
                     dataType: 'json',
                     cache: false,
                     success: function (data) {
-
+                        if(data.estatus == "success"){
+                            $("#mensaje").text(data.mensaje);
+                        }else{
+                            $("#mensaje").text(data);
+                            location.reload();
+                        }
                     }
                 });
             }

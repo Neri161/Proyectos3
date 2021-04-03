@@ -78,9 +78,22 @@ class UsuarioController extends Controller
         if(!$usuario) {
             $proveedor = Proveedor::where("correo",$datos->correo)->first();
 
-            if(!$proveedor)
+            if(!$proveedor) {
+                $admin = Admin::where("nombre",$datos->correo)->first();
+                if (!$admin)
                 return view("login", ["estatus" => "error", "mensaje" => "¡El correo no esta registrado!"]);
 
+                if (!$datos->password==$admin->contrasenia)
+                    return view("login",["estatus"=> "error", "mensaje"=> "¡Datos incorrectos!"]);
+
+                Session::put('admin',$admin);
+                if(isset($datos->url)){
+                    $url = decrypt($datos->url);
+                    return redirect($url);
+                }else{
+                    return redirect()->route('proveedor.inicio');
+                }
+            }
             if(!Hash::check($datos->password,$proveedor->contrasenia))
                 return view("login",["estatus"=> "error", "mensaje"=> "¡Datos incorrectos!"]);
 
@@ -120,15 +133,29 @@ class UsuarioController extends Controller
 
     public function inicio(){
         $productos = Producto::get();
-        return view('inicioUsuario',["productos"=>$productos]);
+        $pedidos = 0;
+        if(session('direccion'))
+        $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
+
+        return view('inicioUsuario',["productos"=>$productos,"pedidos"=>$pedidos]);
     }
     public function perfil(){
-        return view('perfilUsuario');
+        $pedidos = 0;
+        if(session('direccion'))
+            $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
+        return view('perfilUsuario',["pedidos"=>$pedidos]);
     }
     public function datos(){
-        return view('direccionTarjeta');
+        $pedidos = 0;
+        if(session('direccion'))
+            $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
+        return view('direccionTarjeta',["pedidos"=>$pedidos]);
     }
     public function direccion(Request $datos,$idusuario){
+        $pedidos = 0;
+        if(session('direccion'))
+            $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
+
         $direccion = new Direccion();
 
         $direccion->CP=$datos->CP;
@@ -142,10 +169,14 @@ class UsuarioController extends Controller
         $direccion->save();
         $direccion = Direccion::where("id_Usuario",$idusuario)->first();
         Session::put('direccion',$direccion);
-        return view('direccionTarjeta');
+        return view('direccionTarjeta',["pedidos"=>$pedidos]);
 
     }
     public function tarjeta(Request $datos){
+        $pedidos = 0;
+        if(session('direccion'))
+            $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
+
         $tarjeta = new Tarjeta();
         $tarjeta->folio_Tarjeta=$datos->folio_Tarjeta;
         $tarjeta->fechVencimiento=$datos->fech_Vencimineto;
@@ -156,7 +187,7 @@ class UsuarioController extends Controller
         $tarjeta = Tarjeta::where("id_Usuario",$idusuario)->first();
         Session::put('tarjeta',$tarjeta);
         $productos = Producto::get();
-        return view('inicioUsuario',["productos"=>$productos]);
+        return view('inicioUsuario',["productos"=>$productos,"pedidos"=>$pedidos]);
     }
     public function envio($idDireccion,$id){
 
@@ -165,11 +196,18 @@ class UsuarioController extends Controller
         $envio->id_Producto=$id;
         $envio->estatus='Pedido';
         $envio->save();
-        return json_encode(["estatus" => "success","mensaje" => "Ya rifaste"]);
+        $pedidos = 0;
+        if(session('direccion'))
+            $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
+        return json_encode(["estatus" => "success","mensaje" => $pedidos]);
     }
     public function carrito($idDireccion){
+        $pedidos = 0;
+        if(session('direccion'))
+            $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
+
         $productos = Producto::get();
         $envio = Envio::where("id_UD",$idDireccion)->get();
-        return view('carrito',["productos"=>$productos,"envio"=>$envio]);
+        return view('carrito',["productos"=>$productos,"envio"=>$envio,"pedidos"=>$pedidos]);
     }
 }
