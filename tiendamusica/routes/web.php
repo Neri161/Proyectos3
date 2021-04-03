@@ -49,4 +49,13 @@ Route::prefix('/Admin')->middleware("VerificarAdmin")->group(function (){
     Route::get('/inicio', [AdminController::class,'inicio'])->name('admin.inicio');
     Route::get('/RegistroP', [AdminController::class,'registroProveedor'])->name('admin.proveedor');
     Route::post('/RegistroProveedor', [AdminController::class,'verificarProveedor'])->name('admin.form');
+    Route::get('/RegistroA', [AdminController::class,'registroArtista'])->name('admin.artista');
+    Route::post('/RegistroArtista', [AdminController::class,'verificarArtista'])->name('admin.form.artista');
+    Route::get('/RegistroC', [AdminController::class,'registroCategoria'])->name('admin.categoria');
+    Route::post('/RegistroCategoria', [AdminController::class,'verificarCategoria'])->name('admin.form.categoria');
+});
+Route::prefix('/proveedor')->middleware("VerificarProveedor")->group(function (){
+    Route::get('/inicio', [ProveedorController::class,'inicio'])->name('proveedor.inicio');
+    Route::get('/RegistroP', [ProveedorController::class,'registroProducto'])->name('registroProducto');
+    Route::post('/RegistroProducto', [ProveedorController::class,'registrarProducto'])->name('proveedor.form.producto');
 });

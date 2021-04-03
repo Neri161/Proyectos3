@@ -14,7 +14,7 @@
 <body>
 <!-- Navbar en la parte superior que se deliza lo largo de la pagina -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="{{route('usuario.inicio')}}"><i class="fas fa-compact-disc"></i> Aner Vinyl </a>
+    <a class="navbar-brand" href="{{route('proveedor.inicio')}}"><i class="fas fa-compact-disc"></i> Aner Vinyl </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,6 +23,13 @@
         <ul class="navbar-nav mr-auto">
             <!--Menu desplegable -->
             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Acciones
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{route('registroProducto')}}">Registrar Proveedor</a>
+
+                </div>
             </li>
         </ul>
         <!--Busqueda -->
@@ -33,23 +40,12 @@
         <!--Elementos de la derecha -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                @if(session('direccion'))
-                    <a class="nav nav-link active" href="{{route('usuario.carrito')}}/{{session('direccion')->id_Direccion}}"><i class="fas fa-cart-arrow-down"></i>Carrito(<span id="mensaje">{{$pedidos}}</span>)</a>
-                @endif
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="true">
-
-                    Bienvenido {{session('usuario')->nombre}}
+                    Bienvenido {{session('proveedor')->nombre_Proveedor}}
                 </a>
                 <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{route('usuario.perfil')}}">Perfil</a>
-                    @if(!isset(session('direccion')->id_Direccion))
-                    <a class="dropdown-item" href="{{route('usuario.datos')}}">Agregar Direccion</a>
-                    @endif
-                    @if(!isset(session('tarjeta')->folio_Tarjeta))
-                    <a class="dropdown-item" href="{{route('usuario.datos')}}">Agregar Tarjeta</a>
-                    @endif
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{route('cerrar.sesion')}}">Cerrar Sesion</a>
                 </div>

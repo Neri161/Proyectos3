@@ -37,6 +37,8 @@ class UsuarioController extends Controller
             Session::forget('direccion');
         if(Session::has('admin'))
             Session::forget('admin');
+        if(Session::has('proveedor'))
+            Session::forget('admin');
 
         return redirect()->route('login.form');
     }
@@ -171,10 +173,10 @@ class UsuarioController extends Controller
         $direccion->save();
         $direccion = Direccion::where("id_Usuario",$idusuario)->first();
         Session::put('direccion',$direccion);
-        return view('direccionTarjeta',["pedidos"=>$pedidos]);
+        return redirect()->route('usuario.inicio');
 
     }
-    public function tarjeta(Request $datos){
+    public function tarjeta(Request $datos,$idusuario){
         $pedidos = 0;
         if(session('direccion'))
             $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();
@@ -188,8 +190,7 @@ class UsuarioController extends Controller
         $tarjeta->save();
         $tarjeta = Tarjeta::where("id_Usuario",$idusuario)->first();
         Session::put('tarjeta',$tarjeta);
-        $productos = Producto::get();
-        return view('inicioUsuario',["productos"=>$productos,"pedidos"=>$pedidos]);
+        return redirect()->route('usuario.inicio');
     }
     public function envio($idDireccion,$id){
 
@@ -198,6 +199,11 @@ class UsuarioController extends Controller
         $envio->id_Producto=$id;
         $envio->estatus='Pedido';
         $envio->save();
+
+        $productos=Producto::where("id",$id)->first();
+        $productos->stock=$productos->stock-1;
+        $productos->save();
+
         $pedidos = 0;
         if(session('direccion'))
             $pedidos = Envio::where("id_UD",session('direccion')->id_Direccion)->count();

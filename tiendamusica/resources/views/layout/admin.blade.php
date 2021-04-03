@@ -28,8 +28,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{route('admin.proveedor')}}">Registrar Proveedor</a>
-                    <a class="dropdown-item" href="index.php?controller=Admin&action=registroArtista">Registrar Artista</a>
-                    <a class="dropdown-item" href="index.php?controller=Admin&action=registroCategoria">Registrar Categoria</a>
+                    <a class="dropdown-item" href="{{route('admin.artista')}}">Registrar Artista</a>
+                    <a class="dropdown-item" href="{{route('admin.categoria')}}">Registrar Categoria</a>
 
                 </div>
             </li>

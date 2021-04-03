@@ -16,12 +16,31 @@
 
             @if(isset($productos))
                 @foreach($productos as $valor)
+
                     <div class="col-md-3">
                         <div class="card">
-                            <img class="card-img-top" src="data:{{$valor['tipoi']}};base64,{{base64_encode($valor['imagen'])}}" width="200"></center>
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="{{$valor['imagen']}}" class="d-block w-100" width="200px" height="200px" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="{{$valor['imagen2']}}" class="d-block w-100" height="200px" alt="...">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
-                                <span><?php echo $valor['nombre']; ?></span>
-                                <h5 class="card-title">$<?php echo $valor['precio']; ?></h5>
+                                <span>{{$valor['nombre']}}</span>
+                                <h5 class="card-title">${{$valor['precio']}}</h5>
+                                <h6 class="card-title">Proveedor: {{$valor['precio']}}</h6>
+                                @if($valor['stock']==0)
+                                    <h6 class="card-title">agotado</h6>
+                                @endif
                                 <p class="card-text">
                                     @if($valor['tipo']=="1") CD @else Vinyl @endif
                                 </p>
@@ -33,6 +52,7 @@
                             </div>
                         </div>
                     </div>
+
                 @endforeach
             @endif
         </div>
@@ -59,6 +79,7 @@
 @endsection
 
 @section('js')
+    @if(session('direccion'))
     <script>
         $(document).ready(function () {
             $(".agregar").click(function (){
@@ -87,4 +108,5 @@
         });
 
     </script>
+    @endif
 @endsection

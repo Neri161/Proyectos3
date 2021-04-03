@@ -22,7 +22,21 @@
                             @if($valor["id"] == $valor2["id_Producto"])
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <img class="card-img-top" src="data:{{$valor['tipoi']}};base64,{{base64_encode($valor['imagen'])}}" width="200"></center>
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                            </ol>
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img src="{{$valor['imagen']}}" class="d-block w-100" width="200px" height="200px" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{$valor['imagen2']}}" class="d-block w-100" height="200px" alt="...">
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="card-body">
                                             <span><?php echo $valor['nombre']; ?></span>
                                             <h5 class="card-title">$<?php echo $valor['precio']; ?></h5>
