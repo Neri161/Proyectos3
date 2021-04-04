@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
@@ -46,6 +47,7 @@ class UsuarioController extends Controller
         $correo = $datos->correo;
         $password2 = $datos->password2;
         $password1 = $datos->password1;
+        $genero = $datos->genero;
 
         if($password1 != $password2){
             return view("registro",["estatus" => "¡Las contraseñas son diferentes!"]);
@@ -54,12 +56,33 @@ class UsuarioController extends Controller
         $usuario->nombre =  $nombre;
         $usuario->apellido_paterno =  $paterno;
         $usuario->apellido_materno =  $materno;
+        $usuario->genero=$genero;
         $usuario->correo =  $correo;
         $usuario->contrasenia = bcrypt($password1);
-        $usuario->foto='';
-        $usuario->tipo='';
         $usuario->save();
         return view("login",["estatus"=> "success", "mensaje"=> "¡Cuenta Creada!"]);
+
+    }
+    public function verificarCredenciales(Request $datos){
+
+        if(!$datos->correo || !$datos->password)
+            return view("login",["estatus"=> "error", "mensaje"=> "¡Completa los campos!"]);
+
+        $usuario = Usuario::where("correo",$datos->correo)->first();
+        if(!$usuario) {
+            return view("login", ["estatus" => "error", "mensaje" => "¡El correo no esta registrado!"]);
+
+        if(!Hash::check($datos->password,$usuario->contrasenia))
+            return view("login",["estatus"=> "error", "mensaje"=> "¡Datos incorrectos!"]);
+
+        Session::put('usuario',$usuario);
+
+        if(isset($datos->url)){
+            $url = decrypt($datos->url);
+            return redirect($url);
+        }else{
+            return redirect()->route('usuario.inicio');
+        }
 
     }
 

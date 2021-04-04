@@ -15,11 +15,9 @@ use App\Http\Controllers\UsuarioController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('bienvenida');
+    return redirect()->route('login');
 });
 
-Route::get('/bienvenida',[UsuarioController::class,'bienvenida'])->name('bienvenida');
-Route::get('/bienvenida',[UsuarioController::class,'bienvenida'])->name('bienvenida');
 Route::get('/login',[UsuarioController::class,'login'])->name('login');
 Route::post('/login',[UsuarioController::class,'verificarCredenciales'])->name('login.form');
 Route::get('/cerrarSesion',[UsuarioController::class,'cerrarSesion'])->name('cerrar.sesion');
