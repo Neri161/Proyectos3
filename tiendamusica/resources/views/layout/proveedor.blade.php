@@ -27,7 +27,8 @@
                     Acciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{route('registroProducto')}}">Registrar Proveedor</a>
+                    <a class="dropdown-item" href="{{route('registroProducto')}}">Registrar Producto</a>
+                    <a class="dropdown-item" href="{{route('pedidos')}}">Pedidos</a>
 
                 </div>
             </li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Envio;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
@@ -54,5 +55,27 @@ class ProveedorController extends Controller
         $producto->save();
         return redirect()->route('registroProducto');
 
+    }
+    public function pedidos(){
+        $productos=Producto::where("Proveedor",session('proveedor')->id_Proveedor)->get();
+        $envio = Envio::get();
+        foreach($productos as $valor){
+            $artistas=Artista::where("id_Artista",$valor->artista)->first();
+            $valor->artista=$artistas->nombre_Artistico;
+            $categorias=Categoria::where("id_categoria",$valor->categoria)->first();
+            $valor->categoria=$categorias->nombre;
+            if ($valor->tipo==1)
+                $valor->tipo='CD';
+            else
+                $valor->tipo='Vinyl';
+        }
+        return view('pedidos',["envio"=>$envio,"productos"=>$productos]);
+    }
+    public function envio(Request $datos){
+        echo $datos->id;
+        $envio = Envio::where("id",$datos->id)->first();
+        $envio->estatus = 'Enviado';
+        $envio->save();
+        return redirect()->route('pedidos');
     }
 }

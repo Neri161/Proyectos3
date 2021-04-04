@@ -11,26 +11,14 @@
 @section('titulo-pagina')
     <div class="container">
         <br>
-        <form action="index.php?controller=Usuario&action=actualizarFoto&id={{session('usuario')->id_usuario}}" method="post" enctype="multipart/form-data">
             <div class="image-upload">
-                <center><label for="file-input">
-                        @if(session('usuario')->foto != '')
-                        <img  src="data:{{session('usuario')->foto}};base64,<?php echo  base64_encode(session('usuario')->tipo); ?>" alt ="Click aquí para subir tu foto" title ="Click aquí para subir tu foto"
-                              data-toggle="popover"
-                              data-content="Cambiar Foto">
-                        @else
+                <center>
                             <img  src="/img/defecto.jpg" alt ="Click aquí para subir tu foto" title ="Click aquí para subir tu foto"
                                   data-toggle="popover"
                                   data-content="Cambiar Foto">
-                        @endif
-                    </label></center>
-                <input id="file-input" name="image" type="file" required/>
-            </div>
-            <div class="mostrar" id="mostrar">
-                <center><button  class="btn btn-success form-control col-md-3" style="margin-bottom: 3%;" id="guardar">Actualizar Foto</button></center>
-            </div>
+                </center>
 
-        </form>
+            </div>
         <br>
         <div class="row">
             <div class="form-group col-md-3">
@@ -107,10 +95,6 @@
                 </div>
             </div>
         @endif
-
-        <form name="form" action="" method="post" enctype="multipart/form-data">
-            <button class="btn btn-success form-control" style="margin-bottom: 3%;" id="guardar">Actualizar Datos</button>
-        </form>
     </div>
 @endsection
 

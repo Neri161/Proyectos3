@@ -37,7 +37,6 @@
                             <div class="card-body">
                                 <span>{{$valor['nombre']}}</span>
                                 <h5 class="card-title">${{$valor['precio']}}</h5>
-                                <h6 class="card-title">Proveedor: {{$valor['precio']}}</h6>
                                 @if($valor['stock']==0)
                                     <h6 class="card-title">agotado</h6>
                                 @endif

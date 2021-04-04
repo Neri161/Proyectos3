@@ -57,5 +57,8 @@ Route::prefix('/Admin')->middleware("VerificarAdmin")->group(function (){
 Route::prefix('/proveedor')->middleware("VerificarProveedor")->group(function (){
     Route::get('/inicio', [ProveedorController::class,'inicio'])->name('proveedor.inicio');
     Route::get('/RegistroP', [ProveedorController::class,'registroProducto'])->name('registroProducto');
+    Route::get('/pedidos', [ProveedorController::class,'pedidos'])->name('pedidos');
     Route::post('/RegistroProducto', [ProveedorController::class,'registrarProducto'])->name('proveedor.form.producto');
+    Route::post('/envio',[ProveedorController::class,'envio'])->name('pedidos.form.producto');
+
 });
