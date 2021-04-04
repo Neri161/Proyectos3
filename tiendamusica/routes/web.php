@@ -26,7 +26,6 @@ Route::get('/', function () {
     return redirect()->route('bienvenida');
 });
 Route::get('/bienvenida',[UsuarioController::class,'bienvenida'])->name('bienvenida');
-
 Route::get('/bienvenida',[UsuarioController::class,'bienvenida'])->name('bienvenida');
 Route::get('/login',[UsuarioController::class,'login'])->name('login');
 Route::post('/login',[UsuarioController::class,'verificarCredenciales'])->name('login.form');
@@ -60,5 +59,4 @@ Route::prefix('/proveedor')->middleware("VerificarProveedor")->group(function ()
     Route::get('/pedidos', [ProveedorController::class,'pedidos'])->name('pedidos');
     Route::post('/RegistroProducto', [ProveedorController::class,'registrarProducto'])->name('proveedor.form.producto');
     Route::post('/envio',[ProveedorController::class,'envio'])->name('pedidos.form.producto');
-
 });
