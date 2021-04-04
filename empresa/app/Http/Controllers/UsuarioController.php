@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Models\Usuario;
 
 class UsuarioController extends Controller
@@ -69,7 +71,8 @@ class UsuarioController extends Controller
             return view("login",["estatus"=> "error", "mensaje"=> "¡Completa los campos!"]);
 
         $usuario = Usuario::where("correo",$datos->correo)->first();
-        if(!$usuario) {
+
+        if(!$usuario)
             return view("login", ["estatus" => "error", "mensaje" => "¡El correo no esta registrado!"]);
 
         if(!Hash::check($datos->password,$usuario->contrasenia))
@@ -84,6 +87,9 @@ class UsuarioController extends Controller
             return redirect()->route('usuario.inicio');
         }
 
+    }
+    public function inicio(){
+        return view('test');
     }
 
 }
