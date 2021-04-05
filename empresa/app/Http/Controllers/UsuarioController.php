@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Usuario;
+use App\Models\Respuesta;
+use App\Mail\TestMail;
+use App\Mail;
 
 class UsuarioController extends Controller
 {
@@ -23,14 +26,6 @@ class UsuarioController extends Controller
     public function cerrarSesion(){
         if(Session::has('usuario'))
             Session::forget('usuario');
-        if(Session::has('tarjeta'))
-            Session::forget('tarjeta');
-        if(Session::has('direccion'))
-            Session::forget('direccion');
-        if(Session::has('admin'))
-            Session::forget('admin');
-        if(Session::has('proveedor'))
-            Session::forget('admin');
 
         return redirect()->route('login.form');
     }
@@ -89,7 +84,30 @@ class UsuarioController extends Controller
 
     }
     public function inicio(){
-        return view('test');
+        $usuario=Respuesta::where("id_Usuario",session('usuario')->id_usuario)->first();
+        if($usuario)
+            return view('test',["estatus"=>"success"]);
+
+        return view('test',["estatus"=>"danger"]);
+    }
+    public function respuesta($aciertos){
+      $resultado = new Respuesta();
+      $resultado->id_Usuario=session('usuario')->id_usuario;
+      $resultado->aciertos=$aciertos;
+      $verificar=$resultado->save();
+      $correo=session('usuario')->correo;
+      $respuesta=Respuesta::where("id_Usuario",session('usuario')->id_usuario)->first();
+      $contenido="ID DE USUARIO:".session('usuario')->id_usuario."\n".
+              "NOMBRE DE USUARIO".session('usuario')->id_usuario." ".session('usuario')->apellido_paterno." ".session('usuario')->apellido_materno."\n".
+              "CORREO".session('usuario')->correo."\n".
+              "ACIERTOS: ".$aciertos."\n".
+              "FECHA DE APLICACION".$respuesta->created_at;
+      $data = ['name'=> $contenido];
+      Mail::to($correo)->send(new TestMail($data));
+      if($verificar)
+        return json_encode(["estatus" => "success","mensaje" => "Envio de datos exitoso"]);
+
+      return json_encode(["estatus" => "success","mensaje" => "occurio un error"]);
     }
 
 }

@@ -26,4 +26,5 @@ Route::post('/registro',[UsuarioController::class,'registroForm'])->name('regist
 
 Route::prefix('/usuario')->middleware("VerificarUsuario")->group(function (){
     Route::get('/inicio', [UsuarioController::class,'inicio'])->name('usuario.inicio');
+    Route::get('/respuesta/{aciertos?}', [UsuarioController::class,'respuesta'])->name('usuario.test');
 });
