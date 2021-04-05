@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
-
-    public function bienvenida(){
-        return view("bienvenida");
-    }
     public function login(){
         return view("login");
     }
@@ -24,6 +20,7 @@ class UsuarioController extends Controller
     public function registro(){
         return view("registro");
     }
+
     public function cerrarSesion(){
         if(Session::has('usuario'))
             Session::forget('usuario');

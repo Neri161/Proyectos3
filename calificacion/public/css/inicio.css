@@ -1,0 +1,23 @@
+.dropdown{
+    margin-right: 15px;
+}
+body{
+    margin-top: 65px;
+}
+.registros{
+    margin: 2px;
+}
+.image-upload > input
+{
+    display: none;
+}
+.mostrar
+{
+    display: none;
+}
+.image-upload img
+{
+    max-width:200px;
+    max-height: 200px;
+    border-radius: 50px;
+}

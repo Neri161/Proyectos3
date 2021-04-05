@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
+});
+
+Route::get('/login',[UsuarioController::class,'login'])->name('login');
+Route::post('/login',[UsuarioController::class,'verificarCredenciales'])->name('login.form');
+Route::get('/cerrarSesion',[UsuarioController::class,'cerrarSesion'])->name('cerrar.sesion');
+Route::get('/registro',[UsuarioController::class,'registro'])->name('registro');
+Route::post('/registro',[UsuarioController::class,'registroForm'])->name('registro.form');
+
+Route::prefix('/admin')->middleware("VerificarAdmin")->group(function (){
+    Route::get('/inicio', [AdminController::class,'inicio'])->name('admin.inicio');
+    Route::get('/Descargar', [AdminController::class,'descargar'])->name('admin.descarga');
+    Route::get('/Descarga', [AdminController::class,'pdf'])->name('admin.descarga');
 });
