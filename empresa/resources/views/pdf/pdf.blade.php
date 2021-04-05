@@ -23,16 +23,20 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($usuario as $valor)
-            <tr>
-                <th>{{$valor['id_usuario']}}</th>
-                <th>{{$valor['nombre']}}</th>
-                <th>{{$valor['apellido_paterno']}}</th>
-                <th>{{$valor['apellido_materno']}}</th>
-                <th>{{$valor['edad']}}</th>
-                <th>{{$valor['genero']}}</th>
-                <th>{{$valor['correo']}}</th>
-            </tr>
+        @foreach($respuesta as $valor2)
+            @if($valor->id_usuario==$valor2->id_Usuario)
+                <tr>
+                    <th>{{$valor['id_usuario']}}</th>
+                    <th>{{$valor['nombre']}}</th>
+                    <th>{{$valor['apellido_paterno']}}</th>
+                    <th>{{$valor['apellido_materno']}}</th>
+                    <th>{{$valor['edad']}}</th>
+                    <th>{{$valor['genero']}}</th>
+                    <th>{{$valor['correo']}}</th>
+                    <th>{{$valor2['aciertos']}}</th>
+                </tr>
+            @endif
+        @endforeach
         @endforeach
         </tbody>
     </table>

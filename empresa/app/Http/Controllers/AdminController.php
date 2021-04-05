@@ -10,7 +10,7 @@ use App\Models\Respuesta;
 use Illuminate\Support\Facades\DB;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Mail;
-use Dompdf\Adapter\PDFLib;
+
 
 class AdminController extends Controller
 {
@@ -74,12 +74,12 @@ class AdminController extends Controller
     public function descargar(){
         $Usario=Usuario::all();
         $respuesta=Respuesta::all();
-        $pdf = PDF::loadView('pdf',compact('Usario'));
+        $pdf = PDF::loadView('pdf.pdf', $Usario,$respuesta);
         return $pdf->download('Resultados.pdf');
     }
     public function pdf(){
         $Usario=Usuario::all();
         $respuesta=Respuesta::all();
-        return view('pdf',compact('Usario'));
+        return view('pdf',$Usario,$respuesta);
     }
 }
