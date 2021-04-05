@@ -30,9 +30,7 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->from(env('neriesperon2001@gmail.com'),env('MAIL_FROM_NAME'))
-                    ->view('mail')
-                    ->subject('RESULTADO')
-                    ->with($this->data);
+        return $this->subject('Test Mail from Surfside media')
+                    ->view('mail');
     }
 }

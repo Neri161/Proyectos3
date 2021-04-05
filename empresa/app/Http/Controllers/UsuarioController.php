@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Usuario;
 use App\Models\Respuesta;
 use App\Mail\TestMail;
-use App\Mail;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -102,10 +102,12 @@ class UsuarioController extends Controller
               "CORREO".session('usuario')->correo."\n".
               "ACIERTOS: ".$aciertos."\n".
               "FECHA DE APLICACION".$respuesta->created_at;
-      $data = ['name'=> $contenido];
-      Mail::to($correo)->send(new TestMail($data));
+      $data = ['title' => 'Resultado de examen',
+                'dody' => 'HOLA'];
+        Mail::to('nerigallatmon@gmail.com')->send(new TestMail($data));
       if($verificar)
         return json_encode(["estatus" => "success","mensaje" => "Envio de datos exitoso"]);
+
 
       return json_encode(["estatus" => "success","mensaje" => "occurio un error"]);
     }
