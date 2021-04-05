@@ -32,6 +32,9 @@
                     <input type="text" class="form-control" name="materno"  placeholder="Ingrese su Apellido Materno">
                 </div>
                 <div class="form-group mx-sm-4 pt-3">
+                    <input type="text" class="form-control" name="edad"  placeholder="Ingrese su Edad">
+                </div>
+                <div class="form-group mx-sm-4 pt-3">
                     <select name="genero" class="form-control" id="genero">
                         <option value="" class="selected" selected="selected">--Seleccionar Genero--</option>
                         <option value="H" name="genero">Hombre</option>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Usuario;
+use App\Models\Admin;
 use App\Models\Respuesta;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Mail;
@@ -41,6 +42,7 @@ class UsuarioController extends Controller
         $nombre = $datos->nombre;
         $paterno = $datos->paterno;
         $materno = $datos->materno;
+        $edad = $datos->edad;
         $correo = $datos->correo;
         $password2 = $datos->password2;
         $password1 = $datos->password1;
@@ -53,6 +55,7 @@ class UsuarioController extends Controller
         $usuario->nombre =  $nombre;
         $usuario->apellido_paterno =  $paterno;
         $usuario->apellido_materno =  $materno;
+        $usuario->edad =  $edad;
         $usuario->genero=$genero;
         $usuario->correo =  $correo;
         $usuario->contrasenia = bcrypt($password1);
@@ -67,9 +70,25 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::where("correo",$datos->correo)->first();
 
-        if(!$usuario)
-            return view("login", ["estatus" => "error", "mensaje" => "¡El correo no esta registrado!"]);
+        if(!$usuario) {
 
+            $admin = Admin::where("correo",$datos->correo)->first();
+            if (!$admin)
+                return view("login", ["estatus" => "error", "mensaje" => "¡El correo no esta registrado!"]);
+
+            if($datos->password!=$admin->contrasenia)
+                return view("login",["estatus"=> "error", "mensaje"=> "¡Datos incorrectos!"]);
+
+            Session::put('admin',$admin);
+
+            if(isset($datos->url)){
+                $url = decrypt($datos->url);
+                return redirect($url);
+            }else{
+                return redirect()->route('admin.inicio');
+            }
+
+        }
         if(!Hash::check($datos->password,$usuario->contrasenia))
             return view("login",["estatus"=> "error", "mensaje"=> "¡Datos incorrectos!"]);
 
@@ -113,5 +132,6 @@ class UsuarioController extends Controller
 
       return json_encode(["estatus" => "success","mensaje" => "occurio un error"]);
     }
+
 
 }

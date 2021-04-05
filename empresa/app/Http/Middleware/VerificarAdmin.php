@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class VerificarAdmin
 {
@@ -16,6 +17,10 @@ class VerificarAdmin
      */
     public function handle(Request $request, Closure $next)
     {
+        if(!Session::has('admin'))
+            return redirect()->route("login",["r"=> encrypt($request->getRequestUri())]);
+
+
         return $next($request);
     }
 }
