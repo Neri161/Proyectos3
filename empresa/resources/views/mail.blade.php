@@ -9,7 +9,12 @@
 </head>
 <body>
 <h1>{{$data['title']}}</h1>
-<p>{{$data['body']}}</p>
-<p>Gracias</p>
+<p>{{$data['id']}}</p>
+<p>{{$data['nombre']}}</p>
+<p>Correo: {{$data['correo']}}</p>
+<p>Aciertos: {{$data['aciertos']}}</p>
+<p>Fecha de aplicacion: {{$data['fecha']}}</p>
+<br>
+<p>Gracias Por responder {{$data['nombre']}}</p>
 </body>
 </html>

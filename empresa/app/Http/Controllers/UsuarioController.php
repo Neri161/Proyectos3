@@ -97,14 +97,16 @@ class UsuarioController extends Controller
       $verificar=$resultado->save();
       $correo=session('usuario')->correo;
       $respuesta=Respuesta::where("id_Usuario",session('usuario')->id_usuario)->first();
-      $contenido="ID DE USUARIO:".session('usuario')->id_usuario."\n".
-              "NOMBRE DE USUARIO".session('usuario')->id_usuario." ".session('usuario')->apellido_paterno." ".session('usuario')->apellido_materno."\n".
-              "CORREO".session('usuario')->correo."\n".
-              "ACIERTOS: ".$aciertos."\n".
-              "FECHA DE APLICACION".$respuesta->created_at;
+
       $data = ['title' => 'Resultado de examen',
-                'dody' => 'HOLA'];
-        Mail::to('nerigallatmon@gmail.com')->send(new TestMail($data));
+                'id' => "ID DE USUARIO: ".session('usuario')->id_usuario,
+                'nombre' => session('usuario')->nombre." ".session('usuario')->apellido_paterno." ".session('usuario')->apellido_materno,
+                'correo' => $correo,
+                'aciertos'=>$aciertos,
+                'fecha' =>$respuesta->created_at
+              ];
+
+        Mail::to($correo)->send(new TestMail($data));
       if($verificar)
         return json_encode(["estatus" => "success","mensaje" => "Envio de datos exitoso"]);
 
