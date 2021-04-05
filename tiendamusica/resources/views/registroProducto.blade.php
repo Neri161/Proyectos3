@@ -25,33 +25,6 @@
                         <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
                     </div>
                     <div class="form-group">
-                        <label for="categoria">Categoria: </label>
-                        <select name="categoria" class="form-control" id="categoria">
-                            @if(isset($categoria))
-                            @foreach ($categoria as $valor)
-                            <option value="{{$valor['id_Categoria']}}">{{$valor["nombre"]}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="tipo">Tipo: </label>
-                        <select name="tipo" id="tipo" class="form-control">
-                            <option value="1">CD</option>
-                            <option value="2">Vinyl</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="artista">Artista: </label>
-                        <select name="artista" class="form-control">
-                            @if(isset($artista))
-                            @foreach ($artista as $valor)
-                            <option value="{{$valor['id_Artista']}}">{{$valor['nombre_Artistico']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="precio">Precio: </label>
                         <input type="text" name="precio" id="precio" class="form-control" placeholder="Precio" required>
                     </div>

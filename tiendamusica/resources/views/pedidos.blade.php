@@ -41,9 +41,6 @@
                         <tr>
                             <td>{{$valor["id"]}}</td>
                             <td>{{$valor["nombre"]}}</td>
-                            <td>{{$valor["categoria"]}}</td>
-                            <td>{{$valor["artista"]}}</td>
-                            <td>{{$valor["tipo"]}}</td>
                             <td>{{$valor["precio"]}}</td>
                             <td>{{$valor["stock"]}}</td>
                             <td>{{$valor["anio"]}}</td>

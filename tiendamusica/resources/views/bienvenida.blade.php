@@ -45,7 +45,6 @@
                                 <ol class="carousel-indicators">
                                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -59,9 +58,6 @@
                         <div class="card-body">
                             <span><?php echo $valor['nombre']; ?></span>
                             <h5 class="card-title">$<?php echo $valor['precio']; ?></h5>
-                            <p class="card-text">
-                                <?php if($valor['tipo']=="1"){echo "CD";}else{echo "Vinyl";} ?>
-                            </p>
                             <form action="index.php?controller=Envio&action=comprar" method="post">
                                 <div class="mostrar">
                                     <input type="text" class="carrito" name="id" id="id" value="<?php echo $valor['id']; ?>">

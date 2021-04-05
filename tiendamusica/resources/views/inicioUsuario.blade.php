@@ -40,9 +40,6 @@
                                 @if($valor['stock']==0)
                                     <h6 class="card-title">agotado</h6>
                                 @endif
-                                <p class="card-text">
-                                    @if($valor['tipo']=="1") CD @else Vinyl @endif
-                                </p>
                                     @if(session('direccion') && session('tarjeta'))
                                         <button class="btn btn-primary form-control agregar" name="accion" producto="{{$valor['id']}}" id="agregar" type="submit" data-toggle='modal' data-target='#modal1'>Comprar</button>
                                     @else
