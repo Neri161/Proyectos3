@@ -32,5 +32,6 @@ Route::prefix('/usuario')->middleware("VerificarUsuario")->group(function (){
 });
 Route::prefix('/usario')->middleware("VerificarAdmin")->group(function (){
     Route::get('/inicio', [AdminController::class,'inicio'])->name('admin.inicio');
-    Route::get('/Descarga', [AdminController::class,'descargar'])->name('admin.descarga');
+    Route::get('/Descargar', [AdminController::class,'descargar'])->name('admin.descarga');
+    Route::get('/Descarga', [AdminController::class,'pdf'])->name('admin.descarga');
 });

@@ -24,6 +24,7 @@
         </thead>
         <tbody>
         @foreach($respuesta as $valor2)
+        @foreach($usuario as $valor)
             @if($valor->id_usuario==$valor2->id_Usuario)
                 <tr>
                     <th>{{$valor['id_usuario']}}</th>

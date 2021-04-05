@@ -10,6 +10,7 @@ use App\Models\Respuesta;
 use Illuminate\Support\Facades\DB;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF;
 
 
 class AdminController extends Controller
@@ -64,22 +65,16 @@ class AdminController extends Controller
 
         return view('inicio',["pm"=>$promedioM,"ph"=>$promedioH,"edad"=>$edades,"puntaje"=>$puntajes,'top'=>$top]);
     }
-    public function cerrarSesion(){
-        if(Session::has('admin'))
-            Session::forget('admin');
-
-
-        return redirect()->route('login.form');
-    }
     public function descargar(){
+        
         $Usario=Usuario::all();
         $respuesta=Respuesta::all();
-        $pdf = PDF::loadView('pdf.pdf', $Usario,$respuesta);
-        return $pdf->download('Resultados.pdf');
+        $pdf = PDF::loadView('pdf.pdf', ['usuario'=>$Usario,'respuesta'=>$respuesta]);
+        return $pdf->download('pdf.pdf');
     }
     public function pdf(){
         $Usario=Usuario::all();
         $respuesta=Respuesta::all();
-        return view('pdf',$Usario,$respuesta);
+        return view('pdf.pdf', ['usuario'=>$Usario,'respuesta'=>$respuesta]);
     }
 }
