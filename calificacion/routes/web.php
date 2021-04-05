@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,6 @@ Route::get('/cerrarSesion',[UsuarioController::class,'cerrarSesion'])->name('cer
 Route::get('/registro',[UsuarioController::class,'registro'])->name('registro');
 Route::post('/registro',[UsuarioController::class,'registroForm'])->name('registro.form');
 
-Route::prefix('/admin')->middleware("VerificarAdmin")->group(function (){
+Route::prefix('/admin')->middleware("VerificarControl")->group(function (){
     Route::get('/inicio', [AdminController::class,'inicio'])->name('admin.inicio');
-    Route::get('/Descargar', [AdminController::class,'descargar'])->name('admin.descarga');
-    Route::get('/Descarga', [AdminController::class,'pdf'])->name('admin.descarga');
 });

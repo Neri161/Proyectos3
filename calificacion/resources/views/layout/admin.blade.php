@@ -13,7 +13,7 @@
 </head>
 <body>
 <!-- Navbar en la parte superior que se deliza lo largo de la pagina -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
     <a class="navbar-brand" href="{{route('admin.inicio')}}"><i class="fas fa-laugh-beam"></i> CONTROL ESCOLAR </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="true">
 
-                    Bienvenido {{session('admin')->nombre}}
+                    Bienvenido Control Escolar
                 </a>
                 <div class="dropdown-menu " aria-labelledby="navbarDropdown">
                     <div class="dropdown-divider"></div>

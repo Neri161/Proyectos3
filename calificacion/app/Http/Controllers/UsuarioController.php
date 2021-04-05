@@ -33,11 +33,12 @@ class UsuarioController extends Controller
         if(!$datos->correo || !$datos->password)
             return view("login",["estatus"=> "error", "mensaje"=> "¡Completa los campos!"]);
 
-        $usuario = Usuario::where("correo",$datos->correo)->first();
+        $usuario = Usuario::where("matricula",$datos->correo)->first();
 
         if(!$usuario) {
 
-            $admin = Admin::where("correo",$datos->correo)->first();
+            $admin = Admin::where("usuario",$datos->correo)->first();
+
             if (!$admin)
                 return view("login", ["estatus" => "error", "mensaje" => "¡El correo no esta registrado!"]);
 

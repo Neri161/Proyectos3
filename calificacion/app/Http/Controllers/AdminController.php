@@ -10,6 +10,12 @@ use App\Models\Materias;
 class AdminController extends Controller
 {
 
+public function inicio(){
 
+    $alumno=Usuario::get();
+    $materia=Materias::get();
+
+    return view('adminInicio',['usuario'=>$alumno,'materia'=>$materia]);
+}
 
 }
