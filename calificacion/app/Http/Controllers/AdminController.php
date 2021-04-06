@@ -15,8 +15,12 @@ public function inicio(){
 
     $alumno=Usuario::get();
     $calficaciones=Calificacion::get();
+    foreach ($calficaciones as $valor){
+        $materia=Materias::find($valor->id_materia);
+        $valor->id_materia=$materia->asignatura;
+    }
 
-    return view('adminInicio',['usuario'=>$alumno,'materia'=>$calficaciones]);
+    return view('adminInicio',['usuario'=>$alumno,'cali'=>$calficaciones]);
 }
 public function consulta($id){
     $calficaciones=Calificacion::where('id_usuario',$id)->get();

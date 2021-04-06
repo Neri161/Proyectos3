@@ -57,15 +57,16 @@
                             <table class="table table-hover table-active" border="1">
                                 <thead>
                                 <tr>
-                                    <th>ESP</th>
-                                    <th>MAT</th>
+                                    <th>Asigantura</th>
+                                    <th>Calificacion</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(isset($materia))
-                                    @foreach($materia as $valor)
+                                @if(isset($cali))
+                                    @foreach($cali as $valor)
                                         <tr id="{{$valor['id_usuario']}}" class="trh">
-                                            <th>{{$valor['espaniol']}}</th>
+                                            <th>{{$valor['id_materia']}}</th>
+                                            <th>{{$valor['calificacion']}}</th>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -104,7 +105,6 @@
                     cache: false,
                     success: function (data) {
                         if(data.estatus == "success"){
-                            alert(data.mensaje);
                             $("#"+data.mensaje).show();
                         }else{
                             alert('ALUMNO SIN CALIFICACIONES SUBIDAS');
