@@ -59,9 +59,6 @@
                                 <tr>
                                     <th>ESP</th>
                                     <th>MAT</th>
-                                    <th>HIS</th>
-                                    <th>CIE</th>
-                                    <th>GEO</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -69,10 +66,6 @@
                                     @foreach($materia as $valor)
                                         <tr id="{{$valor['id_usuario']}}" class="trh">
                                             <th>{{$valor['espaniol']}}</th>
-                                            <th>{{$valor['matematicas']}}</th>
-                                            <th>{{$valor['historia']}}</th>
-                                            <th>{{$valor['ciencias']}}</th>
-                                            <th>{{$valor['geografia']}}</th>
                                         </tr>
                                     @endforeach
                                 @endif
