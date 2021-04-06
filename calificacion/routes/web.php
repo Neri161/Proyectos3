@@ -27,4 +27,5 @@ Route::post('/registro',[UsuarioController::class,'registroForm'])->name('regist
 
 Route::prefix('/admin')->middleware("VerificarControl")->group(function (){
     Route::get('/inicio', [AdminController::class,'inicio'])->name('admin.inicio');
+    Route::get('/consulta/{id?}', [AdminController::class,'consulta'])->name('admin.cons');
 });
