@@ -14,7 +14,7 @@
 <body>
 <!-- Navbar en la parte superior que se deliza lo largo de la pagina -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
-    <a class="navbar-brand" href="{{route('usuario.inicio')}}"><i class="fas fa-laugh-beam"></i>  </a>
+    <a class="navbar-brand" href="{{route('usuario.inicio')}}"><i class="fas fa-laugh-beam"></i> BOLETAS </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

@@ -27,5 +27,17 @@ Route::post('/registro',[UsuarioController::class,'registroForm'])->name('regist
 
 Route::prefix('/admin')->middleware("VerificarControl")->group(function (){
     Route::get('/inicio', [AdminController::class,'inicio'])->name('admin.inicio');
+    Route::get('/calificaciones/{id?}', [AdminController::class,'calificacion'])->name('admin.cal');
+    Route::get('/alumnos', [AdminController::class,'alumnos'])->name('admin.alumnos');
+    Route::get('/graficas', [AdminController::class,'graficas'])->name('admin.graficas');
     Route::get('/consulta/{id?}', [AdminController::class,'consulta'])->name('admin.cons');
+    Route::get('/materia/{nombre?}', [AdminController::class,'materia'])->name('admin.mat');
+    Route::post('/materia/{nombre?}', [AdminController::class,'registroalumnos'])->name('alumno.registro.form');
+    Route::post('/cali/{id?}/{idm?}', [AdminController::class,'cali'])->name('alumno.cali.form');
+});
+
+Route::prefix('/usuario')->middleware("VerificarUsuario")->group(function (){
+    Route::get('/inicio', [UsuarioController::class,'inicio'])->name('usuario.inicio');
+    Route::get('/pdf', [UsuarioController::class,'descargar'])->name('usuario.pdf');
+
 });

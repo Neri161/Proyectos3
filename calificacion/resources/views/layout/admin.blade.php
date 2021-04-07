@@ -31,12 +31,19 @@
         </form>
         <!--Elementos de la derecha -->
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                    <a class="nav nav-link active" href="{{route('admin.graficas')}}">GRAFICAS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav nav-link active" href="{{route('admin.alumnos')}}">AGREGAR ALUMNOS</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="true">
 
                     Bienvenido Control Escolar
                 </a>
                 <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{route('cerrar.sesion')}}">Cerrar Sesion</a>
                 </div>
